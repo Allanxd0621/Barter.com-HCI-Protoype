@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Post Item - Barter.com</title>
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  background: #01a146;
+}
+
+/* CONTAINER */
+.post-container {
+  max-width: 500px;
+  margin: auto;
+  background: #111;
+  min-height: 100vh;
+  padding: 15px;
+  color: white;
+}
+
+/* HEADER */
+.post-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.back-btn {
+  font-size: 1.5em;
+  color: #00ffaa;
+  cursor: pointer;
+}
+
+.post-header h2 {
+  color: #00ffaa;
+}
+
+/* FORM */
+.form-group {
+  margin-bottom: 12px;
+}
+
+.form-group label {
+  font-size: 0.85em;
+  color: #ccc;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+  background: #222;
+  color: white;
+}
+
+/* TEXTAREA */
+textarea {
+  resize: none;
+  height: 80px;
+}
+
+/* IMAGE UPLOAD */
+.upload-box {
+  display: block;
+  width: 100%;
+  max-width: 300px;
+  margin: 15px auto;
+  border: 2px dashed #00ffaa;
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.upload-box:hover {
+  background: rgba(0,255,170,0.1);
+}
+
+.upload-box input {
+  display: none;
+}
+
+/* PREVIEW */
+.preview img {
+  width: 100%;
+  margin-top: 10px;
+  border-radius: 10px;
+}
+
+/* BUTTON */
+.post-btn {
+  width: 100%;
+  padding: 14px;
+  background: #26e0a2;
+  border: none;
+  border-radius: 10px;
+  font-weight: bold;
+  font-size: 1em;
+  margin-top: 15px;
+  cursor: pointer;
+}
+
+/* POPUP */
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.7);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.popup-content {
+  background: #111;
+  padding: 25px;
+  border-radius: 15px;
+  text-align: center;
+  width: 90%;
+  max-width: 300px;
+  box-shadow: 0 0 20px rgba(0,255,170,0.3);
+}
+
+.popup-content h3 {
+  color: #00ffaa;
+  margin-bottom: 10px;
+}
+
+.popup-content p {
+  font-size: 0.9em;
+  color: #ccc;
+}
+
+.popup-content button {
+  margin-top: 15px;
+  padding: 10px 20px;
+  background: #26e0a2;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* DESKTOP */
+@media (min-width: 600px) {
+  .post-container {
+    margin: 20px auto;
+    border-radius: 15px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="post-container">
+
+  <!-- HEADER -->
+  <div class="post-header">
+    <div class="back-btn" onclick="goBack()">←</div>
+    <h2>Post an Item</h2>
+  </div>
+
+  <!-- FORM -->
+  <div class="form-group">
+    <label>Item Name</label>
+    <input type="text" placeholder="e.g. iPhone 11">
+  </div>
+
+  <div class="form-group">
+    <label>Location</label>
+    <input type="text" placeholder="e.g. Cebu City">
+  </div>
+
+  <div class="form-group">
+    <label>Condition / Issues</label>
+    <textarea placeholder="Describe any issues..."></textarea>
+  </div>
+
+  <div class="form-group">
+    <label>Details</label>
+    <textarea placeholder="More details about the item..."></textarea>
+  </div>
+
+  <!-- IMAGE UPLOAD -->
+  <label class="upload-box">
+    📷 Upload Item Image
+    <input type="file" accept="image/*" onchange="previewImage(event)">
+  </label>
+
+  <div class="preview" id="preview"></div>
+
+  <!-- POST BUTTON -->
+  <button class="post-btn" onclick="postItem()">Post Item</button>
+
+</div>
+
+<!-- POPUP -->
+<div class="popup" id="popup">
+  <div class="popup-content">
+    <h3>Submission Received</h3>
+    <p>Your item has been received.<br>Please wait for approval. Thank you!</p>
+    <button onclick="closePopup()">OK</button>
+  </div>
+</div>
+
+<script>
+
+/* BACK */
+function goBack() {
+  window.location.href = "home.html";
+}
+
+/* IMAGE PREVIEW */
+function previewImage(event) {
+  let preview = document.getElementById("preview");
+  preview.innerHTML = "";
+
+  let file = event.target.files[0];
+  if (!file) return;
+
+  let reader = new FileReader();
+
+  reader.onload = function(e) {
+    let img = document.createElement("img");
+    img.src = e.target.result;
+    preview.appendChild(img);
+  };
+
+  reader.readAsDataURL(file);
+}
+
+/* SHOW POPUP */
+function postItem() {
+  document.getElementById("popup").style.display = "flex";
+}
+
+/* CLOSE POPUP */
+function closePopup() {
+  document.getElementById("popup").style.display = "none";
+}
+
+</script>
+
+</body>
+</html>

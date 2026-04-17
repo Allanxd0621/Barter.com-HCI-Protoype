@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Offer Chat - Barter.com</title>
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  background: #000;
+  color: white;
+}
+
+/* HEADER */
+.chat-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  background: #111;
+  border-bottom: 1px solid #222;
+}
+
+.back-btn {
+  font-size: 1.5em;
+  cursor: pointer;
+  color: #00ffaa;
+}
+
+.chat-header img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.chat-header h3 {
+  font-size: 1em;
+}
+
+/* CHAT AREA */
+.chat-box {
+  padding: 10px;
+  height: calc(100vh - 120px);
+  overflow-y: auto;
+}
+
+/* MESSAGE */
+.message {
+  margin: 8px 0;
+  max-width: 75%;
+  padding: 8px 10px;
+  border-radius: 10px;
+  font-size: 0.9em;
+}
+
+/* RECEIVED */
+.received {
+  background: #222;
+}
+
+/* SENT */
+.sent {
+  background: #26e0a2;
+  color: black;
+  margin-left: auto;
+}
+
+/* OFFER MESSAGE */
+.offer {
+  background: #00ffaa;
+  color: black;
+  font-weight: bold;
+  text-align: center;
+}
+
+/* IMAGE */
+.message img {
+  width: 100%;
+  max-width: 180px;
+  border-radius: 10px;
+  margin-top: 5px;
+}
+.item-preview {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #222;
+}
+
+.item-preview img {
+  width: 50px;
+  height: 50px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.item-info strong {
+  font-size: 0.9em;
+}
+
+.item-info p {
+  font-size: 0.7em;
+  color: #aaa;
+} 
+
+/* INPUT */
+.chat-input {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  gap: 5px;
+  padding: 10px;
+  background: #111;
+}
+
+.chat-input input {
+  flex: 1;
+  padding: 10px;
+  border-radius: 20px;
+  border: none;
+  outline: none;
+}
+
+/* SEND BUTTON */
+.chat-input button {
+  background: #26e0a2;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+/* IMAGE BUTTON */
+.img-btn {
+  font-size: 1.3em;
+  cursor: pointer;
+  padding: 8px;
+}
+
+/* DESKTOP CENTER */
+@media (min-width: 600px) {
+  .chat-box {
+    max-width: 500px;
+    margin: auto;
+  }
+
+  .chat-input {
+    max-width: 500px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .chat-header {
+    max-width: 500px;
+    margin: auto;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<div class="chat-header">
+  <div class="back-btn" onclick="window.open('bikeview.html','_blank')">←</div>
+  <img src="allanpfp.jpg">
+  <h3>Allan</h3>
+</div>
+
+<!-- CHAT -->
+<!-- ITEM PREVIEW -->
+<div class="message received item-preview">
+  <img src="bike.jpg">
+  <div class="item-info">
+    <strong>MountainPeak</strong>
+    <p>Tap to view item</p>
+  </div>
+</div>
+
+<!-- FIRST MESSAGE -->
+<div class="message sent">
+  Hi, is this still available?
+</div>
+
+
+</div>
+
+<!-- INPUT -->
+<div class="chat-input">
+
+  <!-- IMAGE -->
+  <label for="imageInput" class="img-btn">📎</label>
+  <input type="file" id="imageInput" accept="image/*" hidden onchange="sendImage(event)">
+
+  <!-- TEXT -->
+  <input type="text" id="msgInput" placeholder="Type a message...">
+
+  <!-- SEND -->
+  <button onclick="sendMessage()">Send</button>
+
+</div>
+
+<script>
+
+/* BACK BUTTON */
+function goBack() {
+  if (document.referrer !== "") {
+    window.history.back();
+  } else {
+    window.location.href = "home.html";
+  }
+}
+
+/* SEND TEXT */
+function sendMessage() {
+  let input = document.getElementById("msgInput");
+  let chat = document.getElementById("chatBox");
+
+  if (input.value.trim() === "") return;
+
+  let msg = document.createElement("div");
+  msg.className = "message sent";
+  msg.innerText = input.value;
+
+  chat.appendChild(msg);
+
+  input.value = "";
+  chat.scrollTop = chat.scrollHeight;
+}
+
+/* SEND IMAGE */
+function sendImage(event) {
+  let file = event.target.files[0];
+  if (!file) return;
+
+  let reader = new FileReader();
+
+  reader.onload = function(e) {
+    let chat = document.getElementById("chatBox");
+
+    let msg = document.createElement("div");
+    msg.className = "message sent";
+
+    let img = document.createElement("img");
+    img.src = e.target.result;
+
+    msg.appendChild(img);
+    chat.appendChild(msg);
+
+    chat.scrollTop = chat.scrollHeight;
+  };
+
+  reader.readAsDataURL(file);
+}
+
+</script>
+
+</body>
+</html>

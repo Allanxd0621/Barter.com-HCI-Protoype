@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home - Barter.com</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="logo.png">
+
+  <script src="https://kit.fontawesome.com/a2d9d6c28b.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="header-row">
+
+    <!-- LOGO -->
+    <div class="logo">
+      <img src="logo.png">
+      <span>Barter</span>
+    </div>
+
+    <!-- CATEGORIES -->
+    <div class="categories">
+      <a href="clothes.html" target="_blank">Clothes</a>
+      <a href="electronics.html" target="_blank">Electronics</a>
+      <a href="hobbies.html" target="_blank">Hobbies</a>
+      <a href="vehicles.html" target="_blank">Vehicles</a>
+    </div>
+
+    <!-- RIGHT SIDE -->
+    <div class="right-icons">
+
+      <!-- PROFILE -->
+      <div class="profile-icon" onclick="toggleProfile()">
+        <img src="allanpfp.jpg">
+      </div>
+
+      <!-- ADD BUTTON -->
+      <div class="follow-btn" onclick="window.open('add.html','_blank')">
+        <b>🔎︎</b>
+      </div>
+
+      <!-- POST BUTTON -->
+      <div class="post-btn" onclick="window.open('post.html','_blank')">
+        <b>+</b>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- SEARCH -->
+  <div class="top-search">
+    <input type="text" placeholder="Search for an item…">
+  </div>
+</header>
+
+<!-- PROFILE PANEL -->
+<div class="profile-panel" id="profilePanel">
+
+  <div class="profile-top">
+    <button class="back-btn" onclick="toggleProfile()">←</button>
+    <button class="logout-btn" onclick="logout()">Logout</button>
+  </div>
+
+  <div class="profile-header">
+    <img src="allanpfp.jpg">
+    <h2>Allan</h2>
+    <p>Student developer building Barter 💚</p>
+  </div>
+
+  <div class="profile-stats">
+    <div>
+      <h3>12</h3>
+      <p>Posts</p>
+    </div>
+    <div>
+      <h3>5</h3>
+      <p>Trades</p>
+    </div>
+    <div>
+      <h3>4.8★</h3>
+      <p>Rating</p>
+    </div>
+  </div>
+
+  <h3 class="profile-title">Your Items</h3>
+
+  <div class="profile-items">
+    <div class="mini-card">
+      <img src="bike.jpg">
+      <p>Bike</p>
+    </div>
+
+    <div class="mini-card">
+      <img src="guitar.jpg">
+      <p>Guitar</p>
+    </div>
+  </div>
+
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <h1>BARTER</h1>
+  <p>Where your old is someone's gold.</p>
+</section>
+
+<!-- PRODUCTS -->
+<section class="products">
+  <div class="product-grid">
+
+    <div class="product-card">
+      <img src="bike.jpg">
+      <h3>Mountain peak Road bike</h3>
+      <p>Swap for motor</p>
+      <button onclick="window.open('bikeview.html','_blank')">View</button>
+    </div>
+
+    <div class="product-card">
+      <img src="guitar.jpg">
+      <h3>Guitar</h3>
+      <p>Trade for Eukelele</p>
+      <button onclick="window.open('viewgui.html','_blank')">View</button>
+    </div>
+
+    <div class="product-card">
+      <img src="headset.jpg">
+      <h3>Headset na Pink</h3>
+      <p>Swap sa Speaker</p>
+      <button onclick="window.open('headsetview.html','_blank')">View</button>
+    </div>
+
+    <div class="product-card">
+      <img src="book.jpg">
+      <h3>Psychology of Money book</h3>
+      <p>Trade for yellowpad kay wakoy papel</p>
+      <button onclick="window.open('bookview.html','_blank')">View</button>
+    </div>
+
+    <div class="product-card">
+      <img src="painting.jpg">
+      <h3>Acrylic painting</h3>
+      <p>Swap for other painting</p>
+      <button onclick="window.open('paintingview.html','_blank')">View</button>
+    </div>
+
+    <div class="product-card">
+      <img src="phone.jpg">
+      <h3>Cellphone</h3>
+      <p>Looking for earbuds</p>
+      <button onclick="window.open('phoneview.html','_blank')">View</button>
+    </div>
+
+  </div>
+</section>
+
+<script>
+function toggleProfile() {
+  document.getElementById("profilePanel").classList.toggle("active");
+}
+
+function logout() {
+  alert("Logged out successfully!");
+  window.location.href = "login.html";
+}
+</script>
+
+</body>
+</html>

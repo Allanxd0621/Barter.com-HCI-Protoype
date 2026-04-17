@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clothes - Barter</title>
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  background: #19241a;
+}
+
+/* HEADER */
+header {
+  background: #000;
+  color: white;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.header-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* LOGO */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.logo img {
+  width: 30px;
+}
+
+.logo span {
+  color: #00ffaa;
+  font-weight: bold;
+}
+
+/* CATEGORIES */
+.categories {
+  display: flex;
+  gap: 10px;
+  font-size: 0.8em;
+  flex: 1;
+}
+
+.categories a {
+  color: white;
+  text-decoration: none;
+}
+
+/* PROFILE + POST */
+.profile-icon img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.post-btn {
+  background: #00ffaa;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* SEARCH */
+.top-search input {
+  width: 100%;
+  padding: 8px;
+  border-radius: 5px;
+  border: none;
+}
+
+/* PRODUCTS */
+.products {
+  margin: 15px;
+  padding: 15px;
+  background: linear-gradient(135deg,#13b37d,#000);
+  border-radius: 20px;
+}
+
+.section-title {
+  text-align: center;
+  color: #00ffaa;
+  margin-bottom: 10px;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 10px;
+}
+
+/* CARD */
+.product-card {
+  background: #111;
+  padding: 8px;
+  border-radius: 10px;
+}
+
+.product-card img {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.product-card h3 {
+  color: #00ffaa;
+  font-size: 0.85em;
+}
+
+.product-card p {
+  font-size: 0.7em;
+  color: #ccc;
+}
+
+.product-card button {
+  width: 100%;
+  margin-top: 5px;
+  padding: 5px;
+  background: #00ffaa;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* PROFILE PANEL */
+.profile-panel {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 250px;
+  height: 100%;
+  background: #111;
+  color: white;
+  padding: 15px;
+  transition: 0.3s;
+}
+
+.profile-panel.active {
+  right: 0;
+}
+
+.profile-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.back-btn {
+  background: none;
+  border: none;
+  color: #00ffaa;
+  font-size: 1.5em;
+  cursor: pointer;
+}
+
+.profile-header {
+  text-align: center;
+}
+
+.profile-header img {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+}
+
+.profile-stats {
+  display: flex;
+  justify-content: space-around;
+  margin: 15px 0;
+}
+
+.profile-stats h3 {
+  color: #00ffaa;
+}
+</style>
+
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="header-row">
+
+    <div class="logo">
+      <img src="logo.png">
+      <span>Barter</span>
+    </div>
+
+    <div class="categories">
+      <a href="home.html">Home</a>
+      <a href="clothes.html">Clothes</a>
+      <a href="electronics.html">Electronics</a>
+      <a href="hobbies.html">Hobbies</a>
+      <a href="vehicles.html">Vehicles</a>
+    </div>
+
+    <div class="profile-icon" onclick="toggleProfile()">
+      <img src="allanpfp.jpg">
+    </div>
+
+    <div class="post-btn" onclick="alert('Post page')">+</div>
+
+  </div>
+
+  <div class="top-search">
+    <input type="text" placeholder="Search clothes...">
+  </div>
+</header>
+
+<!-- CATEGORY -->
+<section class="products">
+  <h2 class="section-title">Clothes</h2>
+
+  <div class="product-grid">
+
+    <div class="product-card">
+      <img src="shirt.jpg">
+      <h3>Oversized Shirt</h3>
+      <p>Swap for hoodie</p>
+      <button onclick="showPopup()">View</button>
+    </div>
+
+    <div class="product-card">
+      <img src="jacket.jpg">
+      <h3>Denim Jacket</h3>
+      <p>Looking for sneakers</p>
+      <button onclick="showPopup()">View</button>
+    </div>
+
+    <div class="product-card">
+      <img src="hoodie.jpg">
+      <h3>Black Hoodie</h3>
+      <p>Trade for cap</p>
+      <button onclick="showPopup()">View</button>
+    </div>
+
+    <div class="product-card">
+      <img src="shoes.jpg">
+      <h3>Running Shoes</h3>
+      <p>Swap for slides</p>
+      <button onclick="showPopup()">View</button>
+    </div>
+
+  </div>
+</section>
+
+<!-- PROFILE -->
+<div class="profile-panel" id="profilePanel">
+
+  <div class="profile-top">
+    <button class="back-btn" onclick="toggleProfile()">←</button>
+  </div>
+
+  <div class="profile-header">
+    <img src="allanpfp.jpg">
+    <h2>Allan</h2>
+    <p>Student developer building Barter 💚</p>
+  </div>
+
+  <div class="profile-stats">
+    <div><h3>12</h3><p>Posts</p></div>
+    <div><h3>5</h3><p>Trades</p></div>
+    <div><h3>4.8★</h3><p>Rating</p></div>
+  </div>
+
+</div>
+
+<script>
+function toggleProfile() {
+  document.getElementById("profilePanel").classList.toggle("active");
+}
+
+function showPopup() {
+  alert('Sorry maam, this is just a placeholder. Please choose an item on the home page - Group 5');
+}
+</script>
+
+</body>
+</html>

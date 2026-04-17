@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>View Product - Barter.com</title>
+
+<link rel="icon" href="logo.png">
+
+<style>
+body {
+  background: #01a146;
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+}
+
+/* MAIN CONTAINER */
+.view-container {
+  max-width: 500px;
+  margin: auto;
+  padding: 15px;
+  background: #111;
+  color: white;
+  min-height: 100vh;
+}
+
+/* PRODUCT IMAGE */
+.product-photo {
+  width: 100%;
+  height: 40vh;
+  min-height: 220px;
+  max-height: 320px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  cursor: pointer;
+}
+
+/* SELLER */
+.seller-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 15px;
+  cursor: pointer;
+}
+
+.seller-info img {
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.seller-info span {
+  font-size: 0.85em;
+  color: #ccc;
+}
+
+/* DETAILS */
+.product-details p {
+  margin: 8px 0;
+  font-size: 0.95em;
+  color: #ddd;
+}
+
+/* BUTTON */
+.offer-container {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background: #111;
+  padding: 10px;
+}
+
+.offer-btn {
+  width: 100%;
+  padding: 14px;
+  background: #26e0a2;
+  border: none;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.spacer {
+  height: 70px;
+}
+
+/* IMAGE OVERLAY */
+#imageOverlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.95);
+  justify-content: center;
+  align-items: center;
+}
+
+#imageOverlay img {
+  max-width: 95%;
+  max-height: 95%;
+}
+
+/* PROFILE POPUP */
+#profilePopup {
+  display: none;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(1, 23, 6, 0.8);
+  justify-content: center;
+  align-items: center;
+}
+
+.profile-box {
+  background: #111111;
+  color: antiquewhite;
+  padding: 25px;
+  border-radius: 15px;
+  text-align: center;
+  width: 90%;
+  max-width: 350px;
+}
+
+.profile-pic {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+
+.profile-stats {
+  display: flex;
+  justify-content: space-around;
+  margin: 15px 0;
+}
+
+.profile-stats span {
+  font-size: 0.8em;
+  color: #aaa;
+}
+
+#followBtn {
+  width: 100%;
+  padding: 12px;
+  background: #26e0a2;
+  border: none;
+  border-radius: 10px;
+  font-weight: bold;
+}
+
+/* DESKTOP */
+@media (min-width: 600px) {
+  .view-container {
+    margin: 20px auto;
+    border-radius: 15px;
+  }
+
+  .offer-container {
+    max-width: 500px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="view-container">
+
+  <!-- PRODUCT IMAGE -->
+  <img src="bike.jpg" class="product-photo" onclick="showImage(this)">
+
+  <!-- SELLER -->
+  <div class="seller-info" onclick="openProfile()">
+    <img src="allanpfp.jpg">
+    <div>
+      <strong>Allan</strong>
+      <span>Student developer building Barter 💚</span>
+    </div>
+  </div>
+
+  <!-- DETAILS -->
+  <div class="product-details">
+    <p><strong>Brand:</strong> Mountain Peak</p>
+    <p><strong>Condition:</strong> Slight scratches</p>
+    <p><strong>Details:</strong> Used for 1 year, good condition.</p>
+  </div>
+
+  <div class="spacer"></div>
+
+</div>
+
+<!-- OFFER BUTTON -->
+<div class="offer-container">
+  <button class="offer-btn" onclick="window.open('mtboffer.html','_blank')">Make an Offer</button>
+</div>
+
+<!-- IMAGE ZOOM -->
+<div id="imageOverlay" onclick="hideImage()">
+  <img id="fullImage">
+</div>
+
+<!-- PROFILE POPUP -->
+<div id="profilePopup" onclick="closeProfile()">
+  <div class="profile-box" onclick="event.stopPropagation()">
+
+    <img src="allanpfp.jpg" class="profile-pic">
+
+    <h2>Allan</h2>
+    <p>Student developer building Barter 💚</p>
+
+    <div class="profile-stats">
+      <div>
+        <h3>12</h3>
+        <span>Posts</span>
+      </div>
+      <div>
+        <h3>5</h3>
+        <span>Trades</span>
+      </div>
+      <div>
+        <h3>4.8★</h3>
+        <span>Rating</span>
+      </div>
+    </div>
+
+    <button id="followBtn" onclick="toggleFollow()">Follow</button>
+
+  </div>
+</div>
+
+<script>
+/* IMAGE ZOOM */
+function showImage(img) {
+  document.getElementById("imageOverlay").style.display = "flex";
+  document.getElementById("fullImage").src = img.src;
+}
+
+function hideImage() {
+  document.getElementById("imageOverlay").style.display = "none";
+}
+
+/* PROFILE */
+function openProfile() {
+  document.getElementById("profilePopup").style.display = "flex";
+}
+
+function closeProfile() {
+  document.getElementById("profilePopup").style.display = "none";
+}
+
+let isFollowing = false;
+
+function toggleFollow() {
+  let btn = document.getElementById("followBtn");
+
+  isFollowing = !isFollowing;
+
+  if (isFollowing) {
+    btn.innerText = "Unfollow";
+    btn.style.background = "#555";
+  } else {
+    btn.innerText = "Follow";
+    btn.style.background = "#26e0a2";
+  }
+}
+</script>
+
+</body>
+</html>

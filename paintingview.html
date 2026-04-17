@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>View Product - Barter.com</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="logo.png">
+
+  <style>
+    body {
+      background: #01a146;
+      font-family: "Poppins", sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .view-container {
+      max-width: 500px;
+      margin: auto;
+      padding: 15px;
+      background: #111;
+      color: white;
+      border-radius: 0; /* full width on mobile */
+      min-height: 100vh;
+    }
+
+    /* PRODUCT PHOTO */
+    .product-photo {
+      width: 100%;
+      height: 40vh; /* responsive height */
+      min-height: 220px;
+      max-height: 320px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 15px;
+      cursor: pointer;
+    }
+
+    /* SELLER INFO */
+    .seller-info {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 15px;
+    }
+
+    .seller-info img {
+      width: 55px;
+      height: 55px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .seller-info strong {
+      font-size: 1.1em;
+    }
+
+    .seller-info span {
+      font-size: 0.85em;
+      color: #ccc;
+    }
+
+    /* PRODUCT DETAILS */
+    .product-details p {
+      margin: 8px 0;
+      font-size: 0.95em;
+      color: #ddd;
+      line-height: 1.4;
+    }
+
+    /* STICKY OFFER BUTTON */
+    .offer-container {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: #111;
+      padding: 10px;
+      box-shadow: 0 -2px 10px rgba(0,0,0,0.5);
+    }
+
+    .offer-btn {
+      width: 100%;
+      padding: 14px;
+      background: #26e0a2;
+      border: none;
+      border-radius: 10px;
+      font-weight: bold;
+      font-size: 1em;
+      cursor: pointer;
+    }
+
+    /* prevent content from being hidden behind button */
+    .spacer {
+      height: 70px;
+    }
+
+    /* FULL IMAGE OVERLAY */
+    #imageOverlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.95);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    #imageOverlay img {
+      max-width: 95%;
+      max-height: 95%;
+      object-fit: contain;
+      border-radius: 10px;
+    }
+
+    /* DESKTOP FIX */
+    @media (min-width: 600px) {
+      .view-container {
+        margin: 20px auto;
+        border-radius: 15px;
+      }
+
+      .offer-container {
+        max-width: 500px;
+        left: 50%;
+        transform: translateX(-50%);
+        border-radius: 0 0 15px 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="view-container">
+
+  <!-- Product Photo -->
+  <img src="painting.jpg" class="product-photo" onclick="showImage(this)">
+
+  <!-- Seller Information -->
+  <div class="seller-info">
+    <img src="allanpfp.jpg">
+    <div>
+      <strong>Allan</strong>
+      <span>Student developer building Barter 💚</span>
+    </div>
+  </div>
+
+  <!-- Product Details -->
+  <div class="product-details">
+    <p><strong>Brand:</strong> Painting Acrylic</p>
+    <p><strong>Condition / Issues:</strong> Slight scratches on frame</p>
+    <p><strong>Details:</strong> This is a acrylic painting in a canvas real.</p>
+  </div>
+
+  <div class="spacer"></div>
+
+</div>
+
+<!-- STICKY OFFER BUTTON -->
+<div class="offer-container">
+  <button class="offer-btn" onclick="window.open('paintingoffer.html','_blank')">Make an Offer</button>
+</div>
+
+<!-- FULL IMAGE OVERLAY -->
+<div id="imageOverlay" onclick="hideImage()">
+  <img id="fullImage">
+</div>
+
+<script>
+  function showImage(img) {
+    document.getElementById("imageOverlay").style.display = "flex";
+    document.getElementById("fullImage").src = img.src;
+  }
+
+  function hideImage() {
+    document.getElementById("imageOverlay").style.display = "none";
+  }
+</script>
+
+</body>
+</html>
