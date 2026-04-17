@@ -45,7 +45,7 @@ body {
   color: #00ffaa;
 }
 
-/* USER LIST */
+/* USERS */
 .user {
   display: flex;
   align-items: center;
@@ -65,7 +65,7 @@ body {
   width: 45px;
   height: 45px;
   border-radius: 50%;
-  background: gray;
+  object-fit: cover;
 }
 
 .user-info h3 {
@@ -104,6 +104,7 @@ body {
   height: 70px;
   border-radius: 50%;
   margin-bottom: 10px;
+  object-fit: cover;
 }
 
 .popup-box h3 {
@@ -115,7 +116,6 @@ body {
   color: #ccc;
 }
 
-/* FOLLOW BUTTON */
 .follow-btn {
   margin-top: 10px;
   padding: 10px;
@@ -127,7 +127,6 @@ body {
   cursor: pointer;
 }
 
-/* CLOSE */
 .close-btn {
   margin-top: 10px;
   font-size: 0.8em;
@@ -149,7 +148,7 @@ body {
   </div>
 
   <!-- USERS -->
-  <div class="user" onclick="openProfile('John Doe','Manila','4.7★')">
+  <div class="user" onclick="openProfile('Mathew Lasheerda','Manila','4.7★','mathew.jpg')">
     <img src="mathew.jpg">
     <div class="user-info">
       <h3>Mathew Lasheerda</h3>
@@ -157,15 +156,15 @@ body {
     </div>
   </div>
 
-  <div class="user" onclick="openProfile('Jane Smith','Cebu','4.9★')">
+  <div class="user" onclick="openProfile('John Lloyd Lugnasin','Cebu','4.9★','lloyd.jpg')">
     <img src="lloyd.jpg">
     <div class="user-info">
-      <h3>John LLoyd Lugnasin</h3>
+      <h3>John Lloyd Lugnasin</h3>
       <p>Tap to view profile</p>
     </div>
   </div>
 
-  <div class="user" onclick="openProfile('Alex Cruz','Davao','4.5★')">
+  <div class="user" onclick="openProfile('Gaspera Lismoras','Davao','4.5★','gasper.jpg')">
     <img src="gasper.jpg">
     <div class="user-info">
       <h3>Gaspera Lismoras</h3>
@@ -175,16 +174,18 @@ body {
 
 </div>
 
-<!-- POPUP PROFILE -->
+<!-- POPUP -->
 <div class="popup" id="popup">
   <div class="popup-box">
-    <img src="gasper.jpg" id="profilePic">
+
+    <img id="profilePic" src="">
     <h3 id="name"></h3>
     <p id="address"></p>
     <p id="rating"></p>
 
     <button class="follow-btn">Follow</button>
     <span class="close-btn" onclick="closePopup()">Close</span>
+
   </div>
 </div>
 
@@ -196,11 +197,14 @@ function goBack() {
 }
 
 /* OPEN PROFILE */
-function openProfile(name, address, rating) {
+function openProfile(name, address, rating, img) {
   document.getElementById("popup").style.display = "flex";
+
   document.getElementById("name").innerText = name;
   document.getElementById("address").innerText = "📍 " + address;
   document.getElementById("rating").innerText = "⭐ " + rating;
+
+  document.getElementById("profilePic").src = img;
 }
 
 /* CLOSE */
