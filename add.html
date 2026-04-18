@@ -128,7 +128,6 @@ body {
   border-radius: 10px;
   font-weight: bold;
   cursor: pointer;
-
   opacity: 0.5;
   transition: 0.3s;
 }
@@ -202,9 +201,13 @@ body {
 
 <script>
 
-/* BACK */
+/* BACK (FIXED) */
 function goBack() {
-  window.history.back();
+  if (window.history.length > 1) {
+    window.history.back();
+  } else {
+    window.location.href = "home.html"; // change if needed
+  }
 }
 
 /* OPEN PROFILE */
@@ -236,13 +239,12 @@ window.onclick = function(e) {
   }
 }
 
+/* FOLLOW TOGGLE */
 document.getElementById("followBtn").onclick = function() {
   if (this.classList.contains("active")) {
-    // Unfollow
     this.classList.remove("active");
     this.innerText = "Follow";
   } else {
-    // Follow
     this.classList.add("active");
     this.innerText = "Following";
   }
