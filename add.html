@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <title>Add People - Barter</title>
 
 <style>
@@ -15,6 +15,7 @@
 
 body {
   background: #01a146;
+  padding-bottom: env(safe-area-inset-bottom);
 }
 
 /* CONTAINER */
@@ -51,10 +52,11 @@ body {
   align-items: center;
   gap: 10px;
   background: #1a1a1a;
-  padding: 10px;
+  padding: 12px;
   border-radius: 10px;
   margin-bottom: 10px;
   cursor: pointer;
+  transition: 0.2s;
 }
 
 .user:hover {
@@ -94,7 +96,7 @@ body {
   background: #111;
   padding: 20px;
   border-radius: 15px;
-  width: 90%;
+  width: 95%;
   max-width: 300px;
   text-align: center;
 }
@@ -116,17 +118,26 @@ body {
   color: #ccc;
 }
 
+/* FOLLOW BUTTON */
 .follow-btn {
   margin-top: 10px;
-  padding: 10px;
+  padding: 12px;
   width: 100%;
   background: #26e0a2;
   border: none;
   border-radius: 10px;
   font-weight: bold;
   cursor: pointer;
+
+  opacity: 0.5;
+  transition: 0.3s;
 }
 
+.follow-btn.active {
+  opacity: 1;
+}
+
+/* CLOSE */
 .close-btn {
   margin-top: 10px;
   font-size: 0.8em;
@@ -149,7 +160,7 @@ body {
 
   <!-- USERS -->
   <div class="user" onclick="openProfile('Mathew Lasheerda','Manila','4.7★','mathew.jpg')">
-    <img src="mathew.jpg">
+    <img src="mathew.jpg" onerror="this.src='https://via.placeholder.com/45'">
     <div class="user-info">
       <h3>Mathew Lasheerda</h3>
       <p>Tap to view profile</p>
@@ -157,7 +168,7 @@ body {
   </div>
 
   <div class="user" onclick="openProfile('John Lloyd Lugnasin','Cebu','4.9★','lloyd.jpg')">
-    <img src="lloyd.jpg">
+    <img src="lloyd.jpg" onerror="this.src='https://via.placeholder.com/45'">
     <div class="user-info">
       <h3>John Lloyd Lugnasin</h3>
       <p>Tap to view profile</p>
@@ -165,7 +176,7 @@ body {
   </div>
 
   <div class="user" onclick="openProfile('Gaspera Lismoras','Davao','4.5★','gasper.jpg')">
-    <img src="gasper.jpg">
+    <img src="gasper.jpg" onerror="this.src='https://via.placeholder.com/45'">
     <div class="user-info">
       <h3>Gaspera Lismoras</h3>
       <p>Tap to view profile</p>
@@ -183,7 +194,7 @@ body {
     <p id="address"></p>
     <p id="rating"></p>
 
-    <button class="follow-btn">Follow</button>
+    <button class="follow-btn" id="followBtn">Follow</button>
     <span class="close-btn" onclick="closePopup()">Close</span>
 
   </div>
@@ -193,7 +204,7 @@ body {
 
 /* BACK */
 function goBack() {
-  window.close();
+  window.history.back();
 }
 
 /* OPEN PROFILE */
@@ -204,12 +215,37 @@ function openProfile(name, address, rating, img) {
   document.getElementById("address").innerText = "📍 " + address;
   document.getElementById("rating").innerText = "⭐ " + rating;
 
-  document.getElementById("profilePic").src = img;
+  document.getElementById("profilePic").src = img || 'https://via.placeholder.com/70';
+
+  // reset follow button
+  const btn = document.getElementById("followBtn");
+  btn.classList.remove("active");
+  btn.innerText = "Follow";
 }
 
 /* CLOSE */
 function closePopup() {
   document.getElementById("popup").style.display = "none";
+}
+
+/* CLICK OUTSIDE CLOSE */
+window.onclick = function(e) {
+  const popup = document.getElementById("popup");
+  if (e.target === popup) {
+    popup.style.display = "none";
+  }
+}
+
+document.getElementById("followBtn").onclick = function() {
+  if (this.classList.contains("active")) {
+    // Unfollow
+    this.classList.remove("active");
+    this.innerText = "Follow";
+  } else {
+    // Follow
+    this.classList.add("active");
+    this.innerText = "Following";
+  }
 }
 
 </script>
